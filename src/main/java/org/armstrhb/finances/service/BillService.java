@@ -1,0 +1,23 @@
+package org.armstrhb.finances.service;
+
+import java.util.List;
+
+import org.armstrhb.finances.dao.FinanceDao;
+import org.armstrhb.finances.model.Bill;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class BillService {
+	private static final Logger log = LoggerFactory.getLogger(BillService.class);
+	
+	@Autowired
+	FinanceDao dao;
+	
+	public List<Bill> getBills() {
+		log.debug("retrieving bills");
+		return dao.getBills();
+	}
+}
