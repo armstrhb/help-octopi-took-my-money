@@ -17,6 +17,8 @@ public class Bill {
 	private String website;
 	private String phoneNumber;
 	private Balance balance;
+	private Date lastPaymentDate;
+	private PaymentCycle cycle;
 	
 	public String getNotes() {
 		return notes;
@@ -120,5 +122,25 @@ public class Bill {
 	
 	public void setBalance(Balance inBalance) {
 		balance = inBalance;
+	}
+
+	public Date getLastPaymentDate() {
+		return lastPaymentDate;
+	}
+
+	public void setLastPaymentDate(Date lastPaymentDate) {
+		this.lastPaymentDate = lastPaymentDate;
+	}
+
+	public PaymentCycle getCycle() {
+		return cycle;
+	}
+
+	public void setCycle(PaymentCycle cycle) {
+		this.cycle = cycle;
+	}
+	
+	public void setCycle(int month, int year) {
+		this.cycle = new PaymentCycle(month, year);
 	}
 }
