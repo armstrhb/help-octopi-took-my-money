@@ -1,5 +1,7 @@
 package org.armstrhb.finances.model;
 
+import java.util.Calendar;
+
 public class PaymentCycle {
 	private int month;
 	private int year;
@@ -27,5 +29,20 @@ public class PaymentCycle {
 
 	public void setYear(int year) {
 		this.year = year;
+	}
+
+	public boolean isPresent() {
+		Calendar now = Calendar.getInstance();
+		return month == now.get(Calendar.MONTH) + 1 && year == now.get(Calendar.YEAR);
+	}
+	
+	public boolean isBefore() {
+		Calendar now = Calendar.getInstance();
+		return month < now.get(Calendar.MONTH) + 1 || year < now.get(Calendar.YEAR);		
+	}
+	
+	public boolean isAfter() {
+		Calendar now = Calendar.getInstance();
+		return month > now.get(Calendar.MONTH) + 1 || year > now.get(Calendar.YEAR);		
 	}
 }

@@ -5,6 +5,7 @@
   <logger name="sx.blah.discord.Discord4J" level="INFO"/>
   <logger name="org.springframework" level="WARN"/>
   <logger name="org.quartz" level="WARN"/>
+  <logger name="org.hibernate" level="WARN"/>
   
   <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
