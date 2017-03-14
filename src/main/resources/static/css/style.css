@@ -1,0 +1,14 @@
+.bill-grid a.bill-link {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+.bill-grid .bill-grid-item {
+    background: #fafafa;
+    border: 1px solid #f7f7f7;
+}
+
+.bill-grid .bill-grid-item:hover {
+	background: #f7f7f7;
+	border-solid: #f4f4f4;
+}

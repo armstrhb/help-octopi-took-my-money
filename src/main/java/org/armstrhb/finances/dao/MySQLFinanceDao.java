@@ -32,7 +32,7 @@ public class MySQLFinanceDao implements FinanceDao {
 	
 	@Override
 	public List<Bill> getBills() {
-		return template.query("select b.bill_id, bill_name, bill_account_number, bill_created, bill_updated, bill_active, bill_notes, bill_payment_plan_amount, bill_day_of_month_due, bill_website, bill_phone_number, bill_balance_initial_balance, e.last_payment_date, e.cycle_month, e.cycle_year from bill b left join bill_balance on b.bill_id = bill_balance.bill_id left join (select  bill_id, max(bill_event_created) as last_payment_date, max(bill_event_cycle_month) as cycle_month, max(bill_event_cycle_year) as cycle_year from bill_event group by bill_id) e on b.bill_id = e.bill_id", new BillMapper());
+		return template.query("select b.bill_id, bill_name, bill_account_number, bill_created, bill_updated, bill_active, bill_notes, bill_payment_plan_amount, bill_day_of_month_due, bill_website, bill_phone_number, bill_balance_id, bill_balance_initial_balance, e.last_payment_date, e.cycle_month, e.cycle_year from bill b left join bill_balance on b.bill_id = bill_balance.bill_id left join (select  bill_id, max(bill_event_created) as last_payment_date, max(bill_event_cycle_month) as cycle_month, max(bill_event_cycle_year) as cycle_year from bill_event group by bill_id) e on b.bill_id = e.bill_id", new BillMapper());
 	}
 
 	@Override
