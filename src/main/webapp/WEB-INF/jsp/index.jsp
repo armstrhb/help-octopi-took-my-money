@@ -11,24 +11,28 @@
             <h4 class="page-header">Bill Index</h4>
             <div class="bill-grid row">
 			    <c:forEach var="bill" items="${bills}">
-			        <a href="/bill/${bill.id}" class="bill-link">
-				        <div class="bill-grid-item col-xs-6 col-sm-4 col-md-3">
-				            <div class="row text-center">
-				                <div class="col-xs-12">
-				                    <h4>${bill.name}</h4>
-				                </div>
-				                <div class="col-xs-12">
-				                    <h2><fmt:formatNumber pattern="#,##0.00" value="${bill.paymentPlanAmount}"/></h2>
-				                </div>
-				                <div class="col-xs-12">
-				                    Due
-				                    <h4><fmt:formatDate pattern="MM/dd" value="${bill.getDueDate()}"/></h4>
-				                </div>
-				            </div>
-				        </div>
-                    </a>
+			        <div class="bill-grid-item col-xs-6 col-sm-4 col-md-3" data-bill-id="${bill.id}">
+			            <div class="row text-center">
+			                <div class="col-xs-12">
+			                    <h4>${bill.name}</h4>
+			                </div>
+			                <div class="col-xs-12">
+			                    <h2><fmt:formatNumber pattern="#,##0.00" value="${bill.paymentPlanAmount}"/></h2>
+			                </div>
+			                <div class="col-xs-12">
+			                    Due
+			                    <h4><fmt:formatDate pattern="MM/dd" value="${bill.getDueDate()}"/></h4>
+			                </div>
+			            </div>
+			        </div>
 			    </c:forEach>
 		    </div>
         </div>
     </div>
+    
+    <script>
+        $(document).on('click', '.bill-grid-item', function() {
+        	showBillDetail($(this).data("bill-id"));
+        });
+    </script>
 </t:page>

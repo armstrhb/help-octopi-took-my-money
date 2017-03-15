@@ -20,4 +20,9 @@ public class BillService {
 		log.debug("retrieving bills");
 		return dao.getBills();
 	}
+	
+	public Bill getBill(int id) {
+		log.debug("retrieving bill detail for bill id " + id);
+		return dao.getBill(id);
+	}
 }

@@ -11,4 +11,16 @@
 .bill-grid .bill-grid-item:hover {
 	background: #f7f7f7;
 	border-solid: #f4f4f4;
+	cursor: pointer;
+}
+
+#bill-detail-modal .data-item {
+	margin-bottom: 10px;
+}
+
+#bill-detail-modal .data-item .label {
+	color: #686868;
+	text-transform: uppercase;
+	padding: 0px 0px;
+	font-weight: normal;
 }

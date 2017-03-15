@@ -4,12 +4,12 @@ public class Balance extends Bill {
 	private int balanceId;
 	private float initialBalance;
 	
-	public int getDebtId() {
+	public int getId() {
 		return balanceId;
 	}
 	
-	public void setBalanceId(int debtId) {
-		this.balanceId = debtId;
+	public void setBalanceId(int id) {
+		this.balanceId = id;
 	}
 	
 	public float getInitialBalance() {

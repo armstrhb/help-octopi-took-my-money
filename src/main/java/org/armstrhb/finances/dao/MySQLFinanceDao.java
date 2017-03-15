@@ -53,7 +53,7 @@ public class MySQLFinanceDao implements FinanceDao {
 
 	@Override
 	public Bill getBill(int id) {
-		return template.queryForObject("select bill.bill_id, bill_name, bill_account_number, bill_created, bill_updated, bill_active, bill_notes, bill_payment_plan_amount, bill_day_of_month_due, bill_website, bill_phone_number, bill.bill_type_id, bill_type_name, bill_debt_info_id, bill_debt_info_initial_balance from bill inner join bill_type on bill.bill_type_id = bill_type.bill_type_id left join bill_debt_info on bill.bill_id = bill_debt_info.bill_id where bill.bill_id = ?", new BillMapper(), id);
+		return template.queryForObject("select b.bill_id, bill_name, bill_account_number, bill_created, bill_updated, bill_active, bill_notes, bill_payment_plan_amount, bill_day_of_month_due, bill_website, bill_phone_number, bill_balance_id, bill_balance_initial_balance, e.last_payment_date, e.cycle_month, e.cycle_year from bill b left join bill_balance on b.bill_id = bill_balance.bill_id left join (select  bill_id, max(bill_event_created) as last_payment_date, max(bill_event_cycle_month) as cycle_month, max(bill_event_cycle_year) as cycle_year from bill_event group by bill_id) e on b.bill_id = e.bill_id where b.bill_id = ?", new BillMapper(), id);
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class MySQLFinanceDao implements FinanceDao {
 			}
 		}, keyHolder);
 		
-		if (bill.hasBalance()) {
+		if (bill.doesBalanceExist()) {
 			Balance debt = bill.getBalance();
 			template.update("insert into bill_balance (bill_id, bill_balance_initial_balance) values (?, ?)", bill.getId(), debt.getInitialBalance()); 
 		}

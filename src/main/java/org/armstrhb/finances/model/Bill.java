@@ -109,11 +109,11 @@ public class Bill {
 		this.active = active;
 	}
 	
-	public boolean hasPaymentPlan() {
+	public boolean doesPaymentPlanExist() {
 		return getPaymentPlanAmount() != NO_PAYMENY_PLAN_AMOUNT;
 	}
 	
-	public boolean hasBalance() {
+	public boolean doesBalanceExist() {
 		 return getBalance() != null || getBalance().getInitialBalance() >= 0;
 	}
 	
