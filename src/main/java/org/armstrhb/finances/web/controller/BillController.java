@@ -15,13 +15,13 @@ public class BillController {
 	@Autowired
 	BillService billService;
 	
-	@RequestMapping(value={"", "/"})
+	@RequestMapping("/bills")
 	public String index(Map<String, Object> model) {
 		model.put("bills", billService.getBills());
-		return "index";
+		return "billindex";
 	}
 	
-	@RequestMapping("/bill/{id}")
+	@RequestMapping("/bills/{id}")
 	public @ResponseBody Bill getBill(@PathVariable int id) {
 		return billService.getBill(id);
 	}

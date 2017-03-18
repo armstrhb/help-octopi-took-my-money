@@ -46,7 +46,7 @@
 
 <script>
     function showBillDetail(id) {
-    	$.get("/bill/" + id, function(data) {
+    	$.get("/bills/" + id, function(data) {
     		var modal = $("#bill-detail-modal");
     		
     		modal.find(".bill-name").html(data.name);
