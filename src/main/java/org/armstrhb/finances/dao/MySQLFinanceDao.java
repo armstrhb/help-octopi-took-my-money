@@ -90,7 +90,7 @@ public class MySQLFinanceDao implements FinanceDao {
 			}
 		}, keyHolder);
 		
-		if (bill.doesBalanceExist()) {
+		if (bill.isBalanceAvailable()) {
 			Balance debt = bill.getBalance();
 			template.update("insert into bill_balance (bill_id, bill_balance_initial_balance) values (?, ?)", bill.getId(), debt.getInitialBalance()); 
 		}

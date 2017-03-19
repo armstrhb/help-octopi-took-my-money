@@ -1,7 +1,9 @@
 package org.armstrhb.finances.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class Bill {
 	public static final float NO_PAYMENY_PLAN_AMOUNT = -1.0f;
@@ -20,6 +22,15 @@ public class Bill {
 	private Balance balance;
 	private Date lastPaymentDate;
 	private PaymentCycle cycle;
+	private List<Event> events;
+	
+	public Bill() {
+		events = new ArrayList<Event>();
+	}
+	
+	public boolean isNoteAvailable() {
+		return notes != null && notes.length() > 0;
+	}
 	
 	public String getNotes() {
 		return notes;
@@ -113,8 +124,8 @@ public class Bill {
 		return getPaymentPlanAmount() != NO_PAYMENY_PLAN_AMOUNT;
 	}
 	
-	public boolean doesBalanceExist() {
-		 return getBalance() != null || getBalance().getInitialBalance() >= 0;
+	public boolean isBalanceAvailable() {
+		 return getBalance() != null && getBalance().getInitialBalance() >= 0;
 	}
 	
 	public Balance getBalance() {
@@ -172,5 +183,17 @@ public class Bill {
 	
 	public boolean isOverDue() {
 		return getDueDate().before(new Date());
+	}
+	
+	public boolean hasHistory() {
+		return events != null && events.size() > 0;
+	}
+	
+	public void setEvents(List<Event> inEvents) {
+		events = inEvents;
+	}
+	
+	public List<Event> getEvents() {
+		return events;
 	}
 }
