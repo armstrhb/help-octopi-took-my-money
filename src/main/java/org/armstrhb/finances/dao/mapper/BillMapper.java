@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.armstrhb.finances.model.Bill;
-import org.armstrhb.finances.model.PaymentCycle;
 import org.armstrhb.finances.model.Balance;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -30,10 +29,6 @@ public class BillMapper implements RowMapper<Bill> {
 			bill.setBalance(getBalanceProperties(rs, rowNum));
 		}
 		
-		if (hasCycle(rs)) {
-			bill.setCycle(getCycleProperties(rs, rowNum));
-		}
-		
 		return bill;
 	}
 	
@@ -41,7 +36,7 @@ public class BillMapper implements RowMapper<Bill> {
 		float amount;
 		
 		try {
-			amount = rs.getFloat("bill_payment_plan_amount");
+			amount = rs.getFloat("bill_plan_amount");
 		} catch (SQLException sqle) {
 			if (rs.wasNull()) {
 				amount = Bill.NO_PAYMENY_PLAN_AMOUNT;
@@ -62,7 +57,7 @@ public class BillMapper implements RowMapper<Bill> {
 		boolean hasBalance = false;
 		
 		try {
-			hasBalance = rs.getInt("bill_balance_initial_balance") > 0;
+			hasBalance = rs.getInt("bill_initial_balance") > 0;
 		} catch (SQLException sqle) {
 			if (!rs.wasNull()) {
 				throw sqle;
@@ -71,28 +66,4 @@ public class BillMapper implements RowMapper<Bill> {
 		
 		return hasBalance;
 	}
-	
-	public boolean hasCycle(ResultSet rs) throws SQLException {
-		boolean hasCycle = false;
-		
-		try {
-			hasCycle = rs.getInt("cycle_month") > 0;
-		} catch (SQLException sqle) {
-			if (!rs.wasNull()) {
-				throw sqle;
-			}
-		}
-		
-		return hasCycle;
-	}
-	
-	public PaymentCycle getCycleProperties(ResultSet rs, int rowNum) throws SQLException {
-		PaymentCycle cycle = new PaymentCycle();
-		
-		cycle.setMonth(rs.getInt("cycle_month"));
-		cycle.setYear(rs.getInt("cycle_year"));
-		
-		return cycle;
-	}
-
 }

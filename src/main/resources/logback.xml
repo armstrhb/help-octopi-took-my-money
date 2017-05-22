@@ -14,12 +14,12 @@
   </appender> 
   
   <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-	<file>C:/users/henbo/logs/finances/finances.log</file>
+	<file>E:/Code/logs/finances/finances.log</file>
 	<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
       <pattern>%d{MM-dd-yy HH:mm:ss.SSS} [%-5level] [%logger] - %msg%n</pattern>
 	</encoder>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>C:/users/henbo/logs/finances/finances.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <fileNamePattern>E:/Code/logs/finances/finances.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <maxFileSize>10MB</maxFileSize>
       </timeBasedFileNamingAndTriggeringPolicy>

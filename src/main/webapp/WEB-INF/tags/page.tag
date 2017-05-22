@@ -18,5 +18,6 @@
         </div>
         
         <t:billdetail/>
+        <t:billcreate/>
     </body>
 </html>

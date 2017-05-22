@@ -1,7 +1,6 @@
 package org.armstrhb.finances.model;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +20,6 @@ public class Bill {
 	private String phoneNumber;
 	private Balance balance;
 	private Date lastPaymentDate;
-	private PaymentCycle cycle;
 	private List<Event> events;
 	
 	public Bill() {
@@ -142,47 +140,10 @@ public class Bill {
 
 	public void setLastPaymentDate(Date lastPaymentDate) {
 		this.lastPaymentDate = lastPaymentDate;
-		
-		if (cycle == null) {
-			cycle = PaymentCycle.fromDate(lastPaymentDate);
-		}
-	}
-
-	public PaymentCycle getCycle() {
-		return cycle;
-	}
-
-	public void setCycle(PaymentCycle cycle) {
-		this.cycle = cycle;
-	}
-	
-	public void setCycle(int month, int year) {
-		this.cycle = new PaymentCycle(month, year);
-	}
-	
-	public Date getDueDate() {
-		Calendar calendar = Calendar.getInstance();
-		
-		if (lastPaymentDate == null) {
-			Date now = new Date();
-			calendar.set(Calendar.DATE, dayOfMonthDue);
-			
-			if (calendar.getTime().before(now)) {
-				calendar.add(Calendar.MONTH, 1);
-			}
-		} else {
-			PaymentCycle nextCycle = cycle.getNext();
-			
-			calendar.set(Calendar.MONTH, nextCycle.getMonth() - 1);
-			calendar.set(Calendar.DATE, dayOfMonthDue);
-			calendar.set(Calendar.YEAR, nextCycle.getYear());
-		}
-		
-		return calendar.getTime();
 	}
 	
 	public boolean isOverDue() {
-		return getDueDate().before(new Date());
+		return false; //TODO: fill this in
 	}
 	
 	public boolean hasHistory() {
