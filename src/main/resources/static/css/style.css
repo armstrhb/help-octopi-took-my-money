@@ -18,6 +18,31 @@ h4 {
 	font-size: 1.5em;
 }
 
+.well, .alert, .btn {
+	border-radius: 0px;
+}
+
+.alert {
+	border-width: 0px;
+	color: #ffffff;
+}
+
+.alert-success {
+	background: #049372;
+}
+
+.alert-danger, .alert-error {
+	background: #c91f37;
+}
+
+.alert-info {
+	background: #4d8fac;
+}
+
+.alert-warning, .alert-warn {
+	background: #e08a1e;
+}
+
 .bill-grid a.bill-link {
 	color: inherit;
 	text-decoration: inherit;

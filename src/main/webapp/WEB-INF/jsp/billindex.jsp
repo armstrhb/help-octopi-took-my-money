@@ -20,6 +20,7 @@
             <hr/>
         </div>
     </div>
+    <t:notification/>
     <div class="row">
         <div class="col-xs-12">
             <c:choose>

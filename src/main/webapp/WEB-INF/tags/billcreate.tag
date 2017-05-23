@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <div id="bill-create-modal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -50,9 +52,48 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Create</button>
+                <button type="button" id="bill-create-submit-button" class="btn btn-primary" data-dismiss="modal">Create</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+  $("#bill-create-submit-button").click(function() {
+	  $.ajax("<c:url value="/bills/create"/>", {
+		  data: JSON.stringify(getBillCreateFormData()),
+		  contentType: 'application/json',
+		  type: 'POST',
+		  success: function() {
+			  
+		  },
+		  error: function() {
+			  
+		  }
+	  });
+  });
+  
+  function getBillCreateFormData() {
+	  formData = {};
+	  
+	  formData.name = $("#bill-create-bill-name").val();
+	  formData.accountNumer = $("#bill-create-account-number").val();
+	  formData.website = $("#bill-create-website").val();
+	  formData.phoneNumber = $("#bill-create-phone-number").val();
+	  
+	  if ($("#bill-create-paymnet-plan-amount").val()) {
+	      formData.paymentPlanAmount = $("#bill-create-payment-plan-amount").val();
+	  }
+	  
+	  formData.dayOfMonthDue = $("#bill-create-day-of-month-due").val();
+	  
+	  if ($("#bill-create-initial-balance").val()) {
+	      formData.initialBalance = $("#bill-create-initial-balance").val();
+	  }
+	  
+	  formData.notes = $("#bill-create-notes").val();
+	  
+	  return formData;
+  }
+</script>
