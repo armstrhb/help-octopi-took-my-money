@@ -22,35 +22,7 @@
     </div>
     <t:notification/>
     <div class="row">
-        <div class="col-xs-12">
-            <c:choose>
-                <c:when test="${fn:length(bills) > 0}">
-		            <div class="bill-grid row">
-					    <c:forEach var="bill" items="${bills}">
-					        <div class="bill-grid-item col-xs-6 col-sm-4 col-md-3" data-bill-id="${bill.id}">
-					            <div class="row text-center">
-					                <div class="col-xs-12">
-					                    <h4>${bill.name}</h4>
-					                </div>
-					                <div class="col-xs-12">
-					                    <h2><fmt:formatNumber pattern="#,##0.00" value="${bill.paymentPlanAmount}"/></h2>
-					                </div>
-					                <div class="col-xs-12">
-					                    Due
-					                    <h4><fmt:formatDate pattern="MM/dd" value="${bill.getDueDate()}"/></h4>
-					                </div>
-					            </div>
-					        </div>
-					    </c:forEach>
-				    </div>
-			    </c:when>
-			    <c:otherwise>
-			        <div class="text-center"> 
-                        No bills are being tracked. Why don't you create some?
-                    </div>			    
-			    </c:otherwise>
-		    </c:choose>
-        </div>
+        <div id="bill-index-container" class="col-xs-12"></div>
     </div>
     
     <script>
@@ -61,5 +33,53 @@
         $(document).on('click', '#bill-create-modal-show', function() {
         	$("#bill-create-modal").modal({show: true});
         });
+        
+        function refreshBillList() {
+        	$.ajax("<c:url value='/bills'/>", {
+        		dataType: 'json',
+        		success: function(data) {
+        			renderBills(data);
+        		},
+        		error: function() {
+        			notify("error", "Unable to retrieve updated bill index.");
+        		}
+        	});
+        }
+        
+        function renderBills(bills) {
+        	container = $("#bill-index-container");
+        	container.empty();
+        	
+        	if (bills.length > 0) {
+        		grid = $("<div/>", {"class": "bill-grid row"});
+        		
+        		bills.forEach(function(bill) {
+        			gridItem = $("<div/>", {"class": "bill-grid-item col-xs-6 col-sm-4 col-md-3", "data-bill-id": bill.id});
+        			gridInner = $("<div/>", {"class": "row text-center"});
+        			gridNameContainer = $("<div/>", {"class": "col-xs-12"});
+        			gridName = $("<h4/>", {"text": bill.name});
+        			paymentPlanContainer = $("<div/>", {"class": "col-xs-12"});
+        			paymentPlan = $("<h2/>", {"text": new Number(bill.paymentPlanAmount).toFixed(2)});
+        			balanceContainer = $("<div/>", {"class": "col-xs-12"});
+        			balance = $("<h4/>", {"text": new Number(bill.currentBalance).toFixed(2)});
+        			
+        			gridNameContainer.append(gridName);
+        			paymentPlanContainer.append(paymentPlan);
+        			balanceContainer.append(balance);
+        			gridInner.append(gridNameContainer);
+        			gridInner.append(paymentPlanContainer);
+        			gridInner.append(balanceContainer);
+        			gridItem.append(gridInner);
+        			grid.append(gridItem);
+        		});
+        		
+        		container.append(grid);
+        	} else {
+        		notice = $("<div/>", {"class": "text-center", "text": "No bills are being tracked. Why don't you create some?"});
+        		container.append(notice);
+        	}
+        }
+        
+        refreshBillList();
     </script>
 </t:page>

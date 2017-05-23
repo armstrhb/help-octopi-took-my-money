@@ -18,7 +18,7 @@ public class Bill {
 	private int dayOfMonthDue;
 	private String website;
 	private String phoneNumber;
-	private Balance balance;
+	private float initialBalance;
 	private Date lastPaymentDate;
 	private List<Event> events;
 	
@@ -123,15 +123,19 @@ public class Bill {
 	}
 	
 	public boolean isBalanceAvailable() {
-		 return getBalance() != null && getBalance().getInitialBalance() >= 0;
+		 return getCurrentBalance() >= 0;
 	}
 	
-	public Balance getBalance() {
-		return balance;
+	public float getCurrentBalance() {
+		return initialBalance; //TODO: make this the actual current balance
 	}
 	
-	public void setBalance(Balance inBalance) {
-		balance = inBalance;
+	public void setInitialBalance(float inBalance) {
+		initialBalance = inBalance;
+	}
+	
+	public float getInitialBalance() {
+		return initialBalance;
 	}
 
 	public Date getLastPaymentDate() {

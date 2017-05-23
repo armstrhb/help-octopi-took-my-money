@@ -73,7 +73,7 @@ public class MySQLFinanceDao implements FinanceDao {
 		template.update(new PreparedStatementCreator() {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-				PreparedStatement ps = connection.prepareStatement("insert into bill (bill_name, bill_account_number, bill_created, bill_updated, bill_active, bill_notes, bill_payment_plane_amount, bill_day_of_month_due, bill_website, bill_phone_number) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement ps = connection.prepareStatement("insert into bill (bill_name, bill_account_number, bill_created, bill_updated, bill_active, bill_notes, bill_payment_plan_amount, bill_day_of_month_due, bill_website, bill_phone_number) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 				
 				ps.setString(1, bill.getName());
 				ps.setString(2, bill.getAccountNumber());
@@ -89,11 +89,6 @@ public class MySQLFinanceDao implements FinanceDao {
 				return ps;
 			}
 		}, keyHolder);
-		
-		if (bill.isBalanceAvailable()) {
-			Balance debt = bill.getBalance();
-			template.update("insert into bill_balance (bill_id, bill_balance_initial_balance) values (?, ?)", bill.getId(), debt.getInitialBalance()); 
-		}
 		
 		return keyHolder.getKey().intValue();
 	}

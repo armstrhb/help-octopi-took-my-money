@@ -24,10 +24,7 @@ public class BillMapper implements RowMapper<Bill> {
 		bill.setWebsite(rs.getString("bill_website"));
 		bill.setPhoneNumber(rs.getString("bill_phone_number"));
 		bill.setPaymentPlanAmount(getPaymentPlanAmount(rs));
-		
-		if (hasBalance(rs)) {
-			bill.setBalance(getBalanceProperties(rs, rowNum));
-		}
+		bill.setInitialBalance(rs.getFloat("bill_initial_balance"));
 		
 		return bill;
 	}
@@ -36,7 +33,7 @@ public class BillMapper implements RowMapper<Bill> {
 		float amount;
 		
 		try {
-			amount = rs.getFloat("bill_plan_amount");
+			amount = rs.getFloat("bill_payment_plan_amount");
 		} catch (SQLException sqle) {
 			if (rs.wasNull()) {
 				amount = Bill.NO_PAYMENY_PLAN_AMOUNT;
@@ -46,24 +43,5 @@ public class BillMapper implements RowMapper<Bill> {
 		}
 		
 		return amount;
-	}
-	
-	public Balance getBalanceProperties(ResultSet rs, int rowNum) throws SQLException {
-		BalanceMapper mapper = new BalanceMapper();
-		return mapper.mapRow(rs, rowNum);
-	}
-	
-	public boolean hasBalance(ResultSet rs) throws SQLException {
-		boolean hasBalance = false;
-		
-		try {
-			hasBalance = rs.getInt("bill_initial_balance") > 0;
-		} catch (SQLException sqle) {
-			if (!rs.wasNull()) {
-				throw sqle;
-			}
-		}
-		
-		return hasBalance;
 	}
 }

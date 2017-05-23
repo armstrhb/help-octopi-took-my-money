@@ -61,15 +61,22 @@
 
 <script>
   $("#bill-create-submit-button").click(function() {
+	  bill = getBillCreateFormData();
+	  
 	  $.ajax("<c:url value="/bills/create"/>", {
-		  data: JSON.stringify(getBillCreateFormData()),
+		  data: JSON.stringify(bill),
 		  contentType: 'application/json',
 		  type: 'POST',
-		  success: function() {
-			  
+		  success: function(result) {
+			  if (result) {
+				   notify("success", "Bill '" + bill.name + "' created.");
+				   refreshBillList();
+			  } else {
+				   notify("error", "Whoops. Errors encountered while creating bill '" + bill.name + "'.");				  
+			  }
 		  },
 		  error: function() {
-			  
+			  notify("error", "Whoops. Errors encountered while creating bill '" + bill.name + "'.");
 		  }
 	  });
   });
@@ -78,11 +85,11 @@
 	  formData = {};
 	  
 	  formData.name = $("#bill-create-bill-name").val();
-	  formData.accountNumer = $("#bill-create-account-number").val();
+	  formData.accountNumber = $("#bill-create-account-number").val();
 	  formData.website = $("#bill-create-website").val();
 	  formData.phoneNumber = $("#bill-create-phone-number").val();
 	  
-	  if ($("#bill-create-paymnet-plan-amount").val()) {
+	  if ($("#bill-create-payment-plan-amount").val()) {
 	      formData.paymentPlanAmount = $("#bill-create-payment-plan-amount").val();
 	  }
 	  

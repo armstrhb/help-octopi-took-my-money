@@ -25,4 +25,22 @@ public class BillService {
 		log.debug("retrieving bill detail for bill id " + id);
 		return dao.getBill(id);
 	}
+	
+	public boolean createBill(Bill bill) {
+		log.info("creating bill '" + bill.getName() + "'");
+		boolean result = false;
+		
+		try {
+			int id = dao.createBill(bill);
+			
+			if (id > 0) {
+				result = true;
+				log.info("bill '" + bill.getName() + "' created, id: " + id);
+			}
+		} catch (Exception e) {
+			log.error("error encountered while trying to save bill", e);
+		}
+		
+		return result;
+	}
 }
