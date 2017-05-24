@@ -58,7 +58,7 @@
 
 <script>
     function showBillDetail(id) {
-    	$.get("/bills/" + id, function(data) {
+    	$.get("<c:url value='/bills/'/>" + id, function(data) {
     		var moneyFormat = new Intl.NumberFormat('en-US', { 
     			minimumFractionDigits: 2
     		});
