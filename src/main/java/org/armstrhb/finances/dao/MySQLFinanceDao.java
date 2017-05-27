@@ -14,7 +14,6 @@ import org.armstrhb.finances.dao.mapper.EventMapper;
 import org.armstrhb.finances.dao.mapper.PayPeriodMapper;
 import org.armstrhb.finances.model.Bill;
 import org.armstrhb.finances.model.ConfigEntry;
-import org.armstrhb.finances.model.Balance;
 import org.armstrhb.finances.model.Event;
 import org.armstrhb.finances.model.PayPeriod;
 import org.springframework.beans.factory.annotation.Autowired;

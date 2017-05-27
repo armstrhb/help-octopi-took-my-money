@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <div id="bill-detail-modal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -10,41 +10,74 @@
                 </button>
                 <h4 class="modal-title">Bill Detail</h4>
             </div>
-            <div class="modal-body">
-                <h2 class="bill-name"></h2>
+            <div class="modal-body bill-detail">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 text-center">
-                        <h5>Amount Due</h5>
-                        <h2 class="bill-amount-due"></h2>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 text-center">
-                        <h5>Next Due</h5>
-                        <h2 class="bill-due"></h2>
+                    <div class="col-xs-12">
+                        <div class="well well-sm">
+                            <h2 class="bill-name"></h2>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="data-item col-xs-12 col-sm-8">
-                        <div class="label">Account Number</div>
-                        <div class="bill-account"></div>
+                <div class="row bill-board">
+                    <div class="col-xs-12 col-sm-6 text-center">
+                        <div class="well well-sm">
+                            <h5>Amount Due</h5>
+                            <h2 class="bill-amount-due"></h2>
+                        </div>
                     </div>
-                    <div class="data-item col-xs-12 col-sm-4">
-                        <div class="label">Phone Number</div>
-                        <div class="bill-phone"></div>
-                    </div>
-                    <div class="data-item col-xs-12">
-                        <div class="label">Website</div>
-                        <div><a target="_blank" class="bill-website"></a></div>
-                    </div>
-                    <div class="data-item col-xs-12">
-                        <div class="label">Notes</div>
-                        <div class="bill-notes"></div>
+                    <div class="col-xs-12 col-sm-6 text-center">
+                        <div class="well well-sm">
+                            <h5>Next Due</h5>
+                            <h2 class="bill-due"></h2>
+                        </div>
                     </div>
                 </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                        <div class="well well-sm">
+                            <div class="row">
+			                    <div class="data-item col-xs-12 col-sm-6">
+			                        <div class="label">Account Number</div>
+			                        <div class="bill-account"></div>
+			                    </div>
+			                    <div class="data-item col-xs-12 col-sm-6">
+			                        <div class="label">Phone Number</div>
+			                        <div class="bill-phone"></div>
+			                    </div>
+			                    <div class="data-item col-xs-12">
+			                        <div class="label">Website</div>
+			                        <div><a target="_blank" class="bill-website"></a></div>
+			                    </div>
+			                    <div class="data-item col-xs-12">
+			                        <div class="label">Notes</div>
+			                        <div class="bill-notes"></div>
+			                    </div>
+		                    </div>
+	                    </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                        <div class="well well-sm">
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    Commands
+                                    <hr/>
+                                </div>
+                            </div>
+                            <div class="row command-block">
+                                <div class="command col-xs-4 col-sm-4 col-md-12"><a class="btn btn-default btn-block">Get Ahead</a></div>
+                                <div class="command col-xs-4 col-sm-4 col-md-12"><a class="btn btn-default btn-block">Deactivate</a></div>
+                                <div class="command col-xs-4 col-sm-4 col-md-12"><a class="btn btn-block btn-danger">Delete</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
                 <div class="row">
                     <div class="data-item col-xs-12">
-                        <div class="label">History</div>
-                        <div class="bill-history">
-                        
+                        <div class="well well-sm">
+                            <div class="label">History</div>
+                            <div class="bill-history"></div>
                         </div>
                     </div>
                 </div>

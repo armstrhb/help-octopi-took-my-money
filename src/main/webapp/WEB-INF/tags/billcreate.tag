@@ -30,18 +30,26 @@
                             <input type="tel" id="bill-create-phone-number" class="form-control" placeholder="Most still have phone numbers too."></input>
                         </div>
                         <hr/>
-                        <div class="form-group">
-                            <label for="bill-create-payment-plan-amount">Payment Plan</label>
-                            <input type="number" min="0" max="1000" id="bill-create-payment-plan-amount" class="form-control" placeholder="How much are you paying a month?"></input>
-                        </div>
-                        <div class="form-group">
-                            <label for="bill-create-day-of-month-due">Day of Month Due</label>
-                            <input type="number" min="1" max="31" id="bill-create-day-of-month-due" class="form-control" placeholder="When do you pay it?"></input>
-                        </div>
-                        <div class="form-group">
-                            <label for="bill-create-initial-balance">Initial Balance</label>
-                            <input type="number" min="1" id="bill-create-initial-balance" class="form-control" placeholder="Have an initial balance?"></input>
-                            <small id="bill-create-initial-balance-help" class="form-text text-muted">Not all bills have this - you can leave this blank.</small>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4">
+		                        <div class="form-group">
+		                            <label for="bill-create-payment-plan-amount">Payment Plan</label>
+		                            <input type="number" min="0" max="1000" id="bill-create-payment-plan-amount" class="form-control" placeholder="How much are you paying a month?"></input>
+		                        </div>
+	                        </div>
+	                        <div class="col-xs-12 col-sm-4">
+		                        <div class="form-group">
+		                            <label for="bill-create-day-of-month-due">Day of Month Due</label>
+		                            <input type="number" min="1" max="31" id="bill-create-day-of-month-due" class="form-control" placeholder="When do you pay it?"></input>
+		                        </div>
+	                        </div>
+	                        <div class="col-xs-12 col-sm-4">
+		                        <div class="form-group">
+		                            <label for="bill-create-initial-balance">Initial Balance</label>
+		                            <input type="number" min="1" id="bill-create-initial-balance" class="form-control" placeholder="Have an initial balance?"></input>
+		                            <small id="bill-create-initial-balance-help" class="form-text text-muted">Not all bills have this - you can leave this blank.</small>
+		                        </div>
+	                        </div>
                         </div>
                         <hr/>
                         <div class="form-group">
