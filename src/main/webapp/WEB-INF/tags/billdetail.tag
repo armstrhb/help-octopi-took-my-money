@@ -14,7 +14,14 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="well well-sm">
-                            <h2 class="bill-name"></h2>
+                            <div class="row">
+	                            <div class="col-xs-7 col-sm-8 col-md-9">
+	                                <h2 class="bill-name"></h2>
+	                            </div>
+	                            <div class="col-xs-5 col-sm-4 col-md-3 text-right">
+                                    <h2 class="bill-balance custom-tooltip" data-toggle="tooltip" data-placement="top" title="Current Balance"></h2>
+	                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,8 +112,21 @@
     		modal.find(".bill-website").attr("href", data.website);
     		modal.find(".bill-website").html(data.website);
     		
-    		if (data.notesAvailable) {
-    			modal.find(".bill-notes").html(data.notes);
+    		if (data.balanceAvailable) {
+    			if (data.currentBalance == 0) {
+    				modal.find(".bill-balance").html("Paid");
+    				modal.find(".bill-balance").addClass("paid-off");
+    			} else {
+    				modal.find(".bill-balance").html(moneyFormat.format(data.currentBalance));
+    			}
+    		} else {
+    			modal.find(".bill-balance").html("")
+    			modal.find(".bill-balance").addClass("hide");
+    		}
+    		
+    		if (data.noteAvailable) {
+    			converter = new showdown.Converter({simpleLineBreaks: 'true'});
+    			modal.find(".bill-notes").html(converter.makeHtml(data.notes));
     		} else {
     		    modal.find(".bill-notes").html("No notes available.");
     		}

@@ -5,7 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Bill {
-	public static final float NO_PAYMENY_PLAN_AMOUNT = -1.0f;
+	public static final float NO_PAYMENT_PLAN_AMOUNT = -1.0f;
+	public static final float NO_BALANCE_AMOUNT = -1.0f;
 	
 	private int id;
 	private String name;
@@ -119,11 +120,11 @@ public class Bill {
 	}
 	
 	public boolean doesPaymentPlanExist() {
-		return getPaymentPlanAmount() != NO_PAYMENY_PLAN_AMOUNT;
+		return getPaymentPlanAmount() != NO_PAYMENT_PLAN_AMOUNT;
 	}
 	
 	public boolean isBalanceAvailable() {
-		 return getCurrentBalance() >= 0;
+		 return getCurrentBalance() != NO_BALANCE_AMOUNT;
 	}
 	
 	public float getCurrentBalance() {

@@ -18,6 +18,15 @@ h4 {
 	font-size: 1.5em;
 }
 
+.custom-tooltip + .tooltip > .tooltip-inner {
+	background-color: #f00;
+	padding: 15px 10px;
+}
+
+.custom-tooltip + .tooltip > .tooltip-arrow {
+	border-top-color: #f00;
+}
+
 input.form-control, textarea.form-control {
 	border-radius: 0px;
 }
@@ -35,13 +44,21 @@ input.form-control, textarea.form-control {
 	border: 1px solid #88888a;
 }
 
-.bill-detail .bill-name {
+.bill-detail .bill-name, .bill-detail .bill-balance {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
 .bill-detail .command-block .command {
 	margin-bottom: 8px;
+}
+
+.bill-detail .bill-balance.paid-off {
+	background-color: #049372;
+	color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 }
 
 .alert {
