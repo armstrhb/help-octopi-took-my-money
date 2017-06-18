@@ -61,11 +61,16 @@
         			paymentPlanContainer = $("<div/>", {"class": "col-xs-12"});
         			paymentPlan = $("<h2/>", {"text": new Number(bill.paymentPlanAmount).toFixed(2)});
         			balanceContainer = $("<div/>", {"class": "col-xs-12"});
-        			balance = $("<h4/>", {"text": new Number(bill.currentBalance).toFixed(2)});
+        			
+        			if (bill.balanceAvailable) {
+        			    balance = $("<h4/>", {"text": new Number(bill.currentBalance).toFixed(2)});
+        			} else {
+        				balance = $("<h4/>", {"html": "&nbsp;"});
+        			}
         			
         			gridNameContainer.append(gridName);
         			paymentPlanContainer.append(paymentPlan);
-        			balanceContainer.append(balance);
+       			    balanceContainer.append(balance);
         			gridInner.append(gridNameContainer);
         			gridInner.append(paymentPlanContainer);
         			gridInner.append(balanceContainer);
