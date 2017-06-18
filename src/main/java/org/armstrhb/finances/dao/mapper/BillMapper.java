@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.armstrhb.finances.model.Bill;
-import org.armstrhb.finances.model.Balance;
 import org.springframework.jdbc.core.RowMapper;
 
 public class BillMapper implements RowMapper<Bill> {
@@ -36,7 +35,7 @@ public class BillMapper implements RowMapper<Bill> {
 			amount = rs.getFloat("bill_payment_plan_amount");
 		} catch (SQLException sqle) {
 			if (rs.wasNull()) {
-				amount = Bill.NO_PAYMENY_PLAN_AMOUNT;
+				amount = Bill.NO_PAYMENT_PLAN_AMOUNT;
 			} else {
 				throw sqle;
 			}
