@@ -15,11 +15,14 @@
                     <div class="col-xs-12">
                         <div class="well well-sm">
                             <div class="row">
-	                            <div class="col-xs-7 col-sm-8 col-md-9">
+	                            <div class="col-xs-12 col-sm-7 col-md-9">
 	                                <h2 class="bill-name"></h2>
 	                            </div>
-	                            <div class="col-xs-5 col-sm-4 col-md-3 text-right">
-                                    <h2 class="bill-balance custom-tooltip" data-toggle="tooltip" data-placement="top" title="Current Balance"></h2>
+	                            <div class="col-xs-12 col-sm-5 col-md-3 text-right">
+                                    <h2 class="bill-balance custom-tooltip" data-toggle="tooltip" data-placement="top" title="Current Balance">
+                                        <span class="text"></span>
+                                        <span class="icon fa fa-fw"></span>
+                                    </h2>
 	                            </div>
                             </div>
                         </div>
@@ -113,14 +116,23 @@
     		modal.find(".bill-website").html(data.website);
     		
     		if (data.balanceAvailable) {
+    			modal.find(".bill-balance").removeClass("hide");
+    			
     			if (data.currentBalance == 0) {
-    				modal.find(".bill-balance").html("Paid");
+    				modal.find(".bill-balance .text").html("Paid Off");
     				modal.find(".bill-balance").addClass("paid-off");
+    				
+    				modal.find(".bill-balance .icon").addClass("fa-check-square-o");
+    				modal.find(".bill-balance .icon").removeClass("hide fa-square");
     			} else {
-    				modal.find(".bill-balance").html(moneyFormat.format(data.currentBalance));
+    				modal.find(".bill-balance .text").html(moneyFormat.format(data.currentBalance));
+    				modal.find(".bill-balance").removeClass("paid-off");
+    				
+                    modal.find(".bill-balance .icon").addClass("fa-square");
+                    modal.find(".bill-balance .icon").removeClass("hide fa-check-square-o");
     			}
     		} else {
-    			modal.find(".bill-balance").html("")
+    			modal.find(".bill-balance .text").html("")
     			modal.find(".bill-balance").addClass("hide");
     		}
     		
