@@ -46,6 +46,10 @@ public class Bill {
 	public void setPaymentPlanAmount(float paymentPlanAmount) {
 		this.paymentPlanAmount = paymentPlanAmount;
 	}
+	
+	public boolean hasPaymentPlan() {
+		return paymentPlanAmount > 0 && paymentPlanAmount != NO_PAYMENT_PLAN_AMOUNT;
+	}
 
 	public int getDayOfMonthDue() {
 		return dayOfMonthDue;
@@ -128,7 +132,15 @@ public class Bill {
 	}
 	
 	public float getCurrentBalance() {
-		return initialBalance; //TODO: make this the actual current balance
+		float balance = initialBalance;
+		
+		if (hasHistory()) {
+			for (Event event : events) {
+				balance -= event.getAmountPaid();
+			}
+		}
+		
+		return balance;
 	}
 	
 	public void setInitialBalance(float inBalance) {
@@ -137,6 +149,22 @@ public class Bill {
 	
 	public float getInitialBalance() {
 		return initialBalance;
+	}
+	
+	public float getAveragePayment() {
+		float averagePayment = 0.0f;
+		
+		if (hasHistory()) {
+			for (Event event : events) {
+				averagePayment += event.getAmountPaid();
+			}
+			
+			averagePayment = averagePayment / events.size();
+		} else {
+			averagePayment = paymentPlanAmount;
+		}
+		
+		return averagePayment;
 	}
 
 	public Date getLastPaymentDate() {
