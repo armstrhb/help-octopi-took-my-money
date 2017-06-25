@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Bill {
+	private static final Logger log = LoggerFactory.getLogger(Bill.class);
 	public static final float NO_PAYMENT_PLAN_AMOUNT = -1.0f;
 	public static final float NO_BALANCE_AMOUNT = -1.0f;
 	
@@ -155,16 +159,37 @@ public class Bill {
 		float averagePayment = 0.0f;
 		
 		if (hasHistory()) {
-			for (Event event : events) {
-				averagePayment += event.getAmountPaid();
-			}
-			
-			averagePayment = averagePayment / events.size();
+			averagePayment = calculateAveragePayment(getEvents());
 		} else {
 			averagePayment = paymentPlanAmount;
 		}
 		
 		return averagePayment;
+	}
+	
+	private float calculateAveragePayment(List<Event> events) {
+		float total = 0.0f;
+		int sum = 0;
+		int index = 0;
+		
+		log.debug("calculating weighted average from previous payments");
+		
+		for (Event event : events) {
+			index += 1;
+			total += event.getAmountPaid() * index;
+			
+			sum += index;
+			
+			if (log.isDebugEnabled()) {
+				log.debug("step: " + index + ", total: " + total + ", sum: " + sum);
+			}
+		}
+		
+		if (log.isDebugEnabled()) {
+			log.debug("average: " + total + " / " + sum + " = " + (total / sum));
+		}
+		
+		return total / sum;
 	}
 
 	public Date getLastPaymentDate() {
@@ -189,5 +214,9 @@ public class Bill {
 	
 	public List<Event> getEvents() {
 		return events;
+	}
+	
+	public void addEvent(Event event) {
+		events.add(event);
 	}
 }
