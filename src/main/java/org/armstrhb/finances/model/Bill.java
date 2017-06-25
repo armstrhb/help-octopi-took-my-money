@@ -1,6 +1,7 @@
 package org.armstrhb.finances.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -159,7 +160,7 @@ public class Bill {
 		float averagePayment = 0.0f;
 		
 		if (hasHistory()) {
-			averagePayment = calculateAveragePayment(getEvents());
+			averagePayment = calculateAveragePayment(getEvents(false)); // sort by chronological
 		} else {
 			averagePayment = paymentPlanAmount;
 		}
@@ -213,6 +214,22 @@ public class Bill {
 	}
 	
 	public List<Event> getEvents() {
+		return getEvents(true);
+	}
+	
+	public List<Event> getEvents(boolean sortNewer) {
+		if (hasHistory()) {
+			for (Event event : events) {
+				log.debug("event: " + event.getId() + ", created: " + event.getCreated());
+			}
+			
+			if (sortNewer) {
+				Collections.sort(events, (a, b) -> a.getCreated() != null && a.getCreated().before(b.getCreated()) ? 1 : -1);
+			} else {
+				Collections.sort(events, (a, b) -> a.getCreated() != null && a.getCreated().before(b.getCreated()) ? -1 : 1);
+			}
+		}
+		
 		return events;
 	}
 	
